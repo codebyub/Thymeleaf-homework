@@ -4,10 +4,7 @@ import org.springframework.stereotype.Repository;
 import pl.edu.wszib.dao.UserDao;
 import pl.edu.wszib.domain.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -25,9 +22,12 @@ public class UserDaoImpl implements UserDao {
         return new ArrayList<>(userMap.values());
     }
 
+
     @Override
     public void deactivateUsers() {
-
+        for (User user : userMap.values()) {
+            user.setActive(false);
+        }
     }
 
     @Override
@@ -39,7 +39,6 @@ public class UserDaoImpl implements UserDao {
     public User getById(Long id) {
         return userMap.get(id);
     }
-
 
     @Override
     public void saveUser(User user) {

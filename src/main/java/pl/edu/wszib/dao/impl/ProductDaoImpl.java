@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository //dzieki temu w kontrolerze bedziemy mogli miec dostep do klasy implementujacej
+@Repository
 public class ProductDaoImpl implements ProductDao {
 
     private Map<Long, Product> productMap;
@@ -44,8 +44,8 @@ public class ProductDaoImpl implements ProductDao {
         productMap.put(product.getId(), product);
     }
 
-    private void prepareProductList() { //metody prywatne na dole
-        Product product = new Product(); //ctrl alt v przypisze zmienna przy deklaracji new
+    private void prepareProductList() {
+        Product product = new Product();
         product.setName("Produkt 1");
         product.setPrice(10.00);
         product.setQuantity(100);

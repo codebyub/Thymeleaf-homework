@@ -1,6 +1,5 @@
 package pl.edu.wszib.controller;
 
-import org.apache.catalina.valves.HealthCheckValve;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.edu.wszib.dao.UserDao;
 import pl.edu.wszib.domain.User;
-
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -41,6 +38,12 @@ public class UserController {
         User user = userDao.getById(id);
         model.addAttribute("user", user);
         return "user";
+    }
+
+    @GetMapping("users/deactivate")
+    public String deactivate() {
+        userDao.deactivateUsers();
+        return "redirect:/users";
     }
 
     @PostMapping("users/save")

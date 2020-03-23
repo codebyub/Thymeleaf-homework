@@ -11,13 +11,13 @@ import pl.edu.wszib.dao.ProductDao;
 import pl.edu.wszib.domain.Product;
 
 @Primary
-@Controller // punkt wejściowy do naszej aplikacji
+@Controller
 public class ShopController {
 
     @Autowired
     private ProductDao productDao;
 
-    @GetMapping //metoda kontrolera bedzie przechwytywala rzadania typu get i bedzie zwracala widok
+    @GetMapping
     public String welcome() { //przez to, że używamy thymeleaf musimy zwrocic Stringa o nazwie szablonu, ktory zwrócimy
         return "welcome";
     }
@@ -40,25 +40,25 @@ public class ShopController {
     }
 
     @GetMapping("products/remove/{id}")
-    public String remove (@PathVariable Long id) {
+    public String remove(@PathVariable Long id) {
         productDao.removeProduct(id);
-        return "redirect:/products"; //wroci do kontrolera do metody products i wykona sie ona zwracajac wszystkie produkty juz bez tego usunietego
+        return "redirect:/products";
     }
 
     @GetMapping("products/new")
-    public String newProduct (Model model) {
+    public String newProduct(Model model) {
         model.addAttribute("product", new Product());
         return "product";
     }
 
     @PostMapping("products/save")
-    public String saveProduct (Product product) {
+    public String saveProduct(Product product) {
         productDao.saveProduct(product);
         return "redirect:/products";
     }
 
     @GetMapping("products/edit/{id}")
-    public String editProduct (@PathVariable Long id, Model model) {
+    public String editProduct(@PathVariable Long id, Model model) {
         Product product = productDao.getByID(id);
         model.addAttribute("product", product);
         return "product";
